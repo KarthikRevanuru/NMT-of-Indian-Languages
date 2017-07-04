@@ -1,0 +1,15 @@
+Requirements:
+	Keras 
+	TensorFlow or Theano
+	OpenNMT
+	GPU for fast execution
+
+For running Basic encoder_decoder just run "python enc_dec.py"
+
+For running models using openNMT go to the openNMT folder and put parllel corpus into data folder and run the following 3 commands
+
+1) th preprocess.lua -train_src data/src-train.txt -train_tgt data/tgt-train.txt -valid_src data/src-val.txt -valid_tgt data/tgt-val.txt -save_data data/demo
+
+2) 
+
+3) th translate.lua -model model_final.t7 -src data/src-test.txt -output pred.txt
