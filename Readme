@@ -8,8 +8,15 @@ For running Basic encoder_decoder just run "python enc_dec.py"
 
 For running models using openNMT go to the openNMT folder and put parllel corpus into data folder and run the following 3 commands
 
-1) th preprocess.lua -train_src data/src-train.txt -train_tgt data/tgt-train.txt -valid_src data/src-val.txt -valid_tgt data/tgt-val.txt -save_data data/demo
+1) This command is for pre-processing
+th preprocess.lua -train_src data/src-train.txt -train_tgt data/tgt-train.txt -valid_src data/src-val.txt -valid_tgt data/tgt-val.txt -save_data data/demo
 
-2) 
+2)This command is for training this varies with the configuration of your model you want to build. 
+th train.lua -data data/demo-train.t7 -save_model demo-model -gpuid 1 -brnn -brnn_merge sum -residual 1 -global_attention general -end_epoch 30
 
-3) th translate.lua -model model_final.t7 -src data/src-test.txt -output pred.txt
+3)This is for translating 
+th translate.lua -model demo-model_epoch30_260.34.t7 -src data/src-test.txt -output pred.txt -gpuid 1
+
+Model Evaluation:
+Bleu:
+    perl bleu.pl hin_test.txt < pred.txt
